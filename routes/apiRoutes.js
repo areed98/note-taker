@@ -22,3 +22,16 @@ function createNote(body, notesArray) {
     );
     return notes;
 }
+// router
+module.exports = function (router) {
+    //get
+    router.get("/api/notes", (req, res) => {
+        res.json(notes.slice(1));
+    });
+
+    //req
+    router.post("/api/notes", (req, res) => {
+        const newNote = createNote(req.body, notes);
+        res.json(newNote);
+    });
+}
