@@ -25,6 +25,27 @@ function createNote(body, notesArray) {
     );
     return notes;
 }
+
+// Note deletion
+function deleteNote(id, notesArray) {
+    //find the UUID of the note
+    const index = notesArray.indexOf(notesArray.find(el => el.id === id));
+    //delete the note from the array
+    if (index > -1) {
+        notesArray.splice(index, 1);
+        // write new array
+        fs.writeFileSync(
+            path.join(__dirname, '../db/db.json'),
+            JSON.stringify(notesArray, null, 2)
+        );
+    }
+    // return notes array
+    return notesArray;
+
+}
+
+
+
 // router
 module.exports = function (router) {
     //get
@@ -36,5 +57,11 @@ module.exports = function (router) {
     router.post("/api/notes", (req, res) => {
         const newNote = createNote(req.body, notes);
         res.json(newNote);
+    });
+
+    //delete req
+    router.delete("/api/notes/:id", (req, res) => {
+        deleteNote(req.params.id, notes);
+        res.json(true);
     });
 }
