@@ -1,3 +1,8 @@
 [
-  1
+  2,
+  {
+    "title": "New Note",
+    "text": "Test note",
+    "id": "10f4f4962-dec7-4cad-9651-bc33ce8043ff"
+  }
 ]
